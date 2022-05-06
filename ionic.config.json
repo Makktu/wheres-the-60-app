@@ -1,0 +1,7 @@
+{
+  "name": "max-effort",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
