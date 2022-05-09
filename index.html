@@ -2,8 +2,18 @@
 <html lang="en">
     <head>
         <style type="text/css">
+            :root {
+                /* --main_background_color: rgb(48, 133, 54); */
+                --main_background_color: rgb(29, 51, 77);
+                --main_text_color: rgb(185, 220, 58);
+            }
+
             .rightButtons {
                 text-align: right;
+            }
+
+            img {
+                width: 100vw;
             }
         </style>
 
@@ -30,8 +40,8 @@
     <body>
         <ion-app
             style="
-                --ion-background-color: rgb(29, 51, 77);
-                --ion-text-color: rgb(185, 220, 58);
+                --ion-background-color: var(--main_background_color);
+                --ion-text-color: var(--main_text_color);
             "
         >
             <!-- <ion-app> -->
@@ -42,77 +52,62 @@
                     >
                 </ion-toolbar>
             </ion-header>
+
             <!-- HEAD ABOVE, BODY BELOW -->
             <ion-content>
                 <ion-item>
                     <img src="img/the60.png" />
                 </ion-item>
-                <ion-item>
+                <ion-item id="map-pic">
                     <img src="img/coventry-map.png" />
                 </ion-item>
                 <ion-grid>
                     <ion-row>
                         <ion-col size-md="6" offset-md="3">
+                            <div
+                                style="
+                                    background-color: var(
+                                        --main_background_color
+                                    );
+                                    color: var(--ion-text-color);
+                                    text-align: center;
+                                "
+                                id="info"
+                            >
+                                <ion-text color="secondary">
+                                    <h2>Where's it?</h2>
+                                </ion-text>
+                            </div>
                             <ion-card>
                                 <ion-card-header>
-                                    <ion-card-title>
+                                    <!-- <ion-card-title>
                                         Find Out Where That 60 Is:
-                                    </ion-card-title>
+                                    </ion-card-title> -->
                                 </ion-card-header>
                                 <ion-card-content>
-                                    <ion-item>
-                                        <ion-label position="floating"
-                                            >Expense Reason</ion-label
-                                        >
-                                        <ion-input type="text"></ion-input>
-                                    </ion-item>
-                                    <ion-item>
-                                        <ion-label position="floating"
-                                            >Expense Amount</ion-label
-                                        >
-                                        <ion-input
-                                            type="number"
-                                            id="input-amount"
-                                        ></ion-input>
-                                    </ion-item>
-                                    <div class="ion-text-right">
+                                    <div class="buttons">
                                         <ion-button
-                                            fill="outline"
-                                            color="danger"
-                                            ><ion-icon
-                                                slot="start"
-                                                name="close-outline"
-                                            ></ion-icon
-                                            >Clear</ion-button
-                                        >
-                                        <ion-button
+                                            style="width: 30vw"
                                             color="success"
-                                            id="input-reason"
-                                            ><ion-icon
-                                                slot="start"
-                                                name="add-circle-outline"
-                                            ></ion-icon
-                                            >Add Expense</ion-button
+                                            id="to-work"
+                                        >
+                                            To Work</ion-button
+                                        >
+                                        <ion-button
+                                            style="width: 30vw"
+                                            color="danger"
+                                            id="to-home"
+                                            >To Home</ion-button
                                         >
                                     </div>
                                 </ion-card-content>
                             </ion-card>
                         </ion-col>
                     </ion-row>
-                    <div class="buttons">
-                        <ion-button style="width: 46vw" color="success">
-                            To Work</ion-button
-                        >
-                        <ion-button
-                            style="width: 46vw"
-                            color="danger"
-                            id="input-reason"
-                            >To Home</ion-button
-                        >
-                    </div>
                 </ion-grid>
             </ion-content>
         </ion-app>
         <script src="app.js"></script>
+        <script type="text/javascript" src="xmlToJSON.js"></script>
     </body>
 </html>

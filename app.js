@@ -1,9 +1,11 @@
 // ******************************************************
 
+"use strict";
+
 function assessTime() {
     let rightNow = new Date();
     rightNow = rightNow.getHours();
-    return rightNow;
+    return rightNow + 1;
 }
 
 function printLoc(lat, lon) {
@@ -42,7 +44,7 @@ function displayMap(lat, lon, time) {
         time.lastIndexOf("T") + 1,
         time.lastIndexOf("+") - 3
     );
-    let theHour = parseInt(theTime.substring(0, 2));
+    let theHour = parseInt(theTime.substring(0, 2)) + 1;
 
     if (assessTime() >= 21 || assessTime() <= 5) {
         infoLine.textContent = "The 60 is not running at this time";
@@ -58,11 +60,11 @@ function displayMap(lat, lon, time) {
         travellingDirection === "INBOUND" ? "to work " : "home "
     } is here:`;
 
-    messageArea.innerHTML = "";
+    mapPic.innerHTML = "";
 
     // ********************************
 
-    messageArea.innerHTML = `<iframe width="340" height="420" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=${
+    mapPic.innerHTML = `<iframe width="340" height="420" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=${
         lon - 0.001
     }%2C${lat - 0.001}%2C${lon + 0.001}%2C${
         lat + 0.001
@@ -120,8 +122,7 @@ function parseData(data) {
 
 function wheresMySixty() {
     infoLine.textContent = "";
-    messageArea.style = "font-size: 2.5rem;";
-    messageArea.innerHTML =
+    mapPic.innerHTML =
         '<br><br><i class="fas fa-spinner fa-spin fa-3x fa-fw"></i>';
     const url =
         "https://api.codetabs.com/v1/proxy?quest=https://data.bus-data.dft.gov.uk/api/v1/datafeed?boundingBox=-1.42625%2C%2052.36964%2C%20-1.59502%2C%2052.45649&operatorRef=SCNH&lineRef=60&api_key=93b0e2fee16e881a1ccd4a49736d71c44b376744";
@@ -132,7 +133,6 @@ function wheresMySixty() {
     setTimeout(function () {
         if (!infoLine.textContent) {
             infoLine.textContent = "There may be a problem. Reloading...";
-            console.log("131");
 
             setTimeout(function () {
                 if (
@@ -158,15 +158,21 @@ let theTime;
 
 const getButtonHome = document.getElementById("to-home");
 
-btn1.addEventListener("click", () => {
-    console.log("clicked!");
+getButtonHome.addEventListener("click", () => {
+    travellingDirection = "OUTBOUND";
+    wheresMySixty();
 });
 
 const getButtonWork = document.getElementById("to-work");
 
-btn1.addEventListener("click", () => {
-    console.log("clicked!");
+getButtonWork.addEventListener("click", () => {
+    travellingDirection = "INBOUND";
+    wheresMySixty();
 });
+
+const mapPic = document.getElementById("map-pic");
+
+const infoLine = document.getElementById("info");
 
 // ! ______________________________________________________________________
 
