@@ -1,11 +1,9 @@
-// ******************************************************
-
 "use strict";
 
 function assessTime() {
     let rightNow = new Date();
     rightNow = rightNow.getHours();
-    return rightNow + 1;
+    return rightNow;
 }
 
 function printLoc(lat, lon) {
